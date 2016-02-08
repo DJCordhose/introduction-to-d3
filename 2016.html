@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Introduction to D3</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h1>Introduction to D3</h1>
+            <p>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
+            </p>
+            <p>Online-Version: <a href="TODO">TODO</a></p>
+        </section>
+                <section>
+            <h3>D3.js</h3>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://d3js.org/">http://d3js.org/</a>
+                <li class="fragment">Transform your data into visualizations in the browser
+                <li class="fragment">Style of programming declarative
+                <li class="fragment">Main field of use are diagrams using SVG (but D3 is not limited to that)
+                <li class="fragment">Data is bound to SVG elements which change once the data changes
+            </ul>
+        </section>
+
+        <section>
+            <h3>Sample #1: Collision</h3>
+            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111018/index.html#33">
+                <img src="d3-collision-screenshot.png" height="400px">
+            </a>
+        </section>
+
+        <section>
+            <h3>Sample #1: Flexible transistions between display types</h3>
+            <a target="_blank" href="http://mbostock.github.io/d3/talk/20111116/#11">
+                <img src="d3-transitions.png" height="400px">
+            </a>
+        </section>
+
+        <section>
+            <h4>D3 Example Code</h4>
+<pre><code data-trim contenteditable>var updateSelection = d3.select("body") // select the body tag
+    .selectAll("p")  // select all p tags which are children
+    .data([4, 8, 15, 16, 23, 42]) // bind elements with data
+    .text(function (d) { // data gets passed in
+        return "I’m number " + d + "!"; // result gets displayed
+    })
+    .style("font-size", function (d) {
+        return 2 * d + "px";
+    });
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable>
+&lt;p>First p&lt;/p>
+&lt;p>Second p&lt;/p>
+&lt;p>Third p&lt;/p>
+</code></pre>
+            <div><img class="fragment" src="basic-d3.png" height="150px"></div>
+        </section>
+        <section>
+            <h3>Data-Joins</h3>
+            <p>Data is being linked to elements using <a target="_blank" href="http://bost.ocks.org/mike/join/">Joins</a></p>
+            <p><a href="https://gist.github.com/mbostock/3808218" target="_blank">Example</a></p>
+            <img src="data-join.png" height="400px">
+            <p><small>Copyright 2012, Mike Bostock http://bost.ocks.org/mike/join/</small></p>
+        </section>
+        <section>
+            <h4>Enter, Update, Exit</h4>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// add a paragraph for each data not bound to an element
+updateSelection.enter()
+    .append("p")
+    .text(function (d) {return "I’m number " + d + "!";});
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// update data and update elements
+data[1] = 40;
+var newSelection = updateSelection.data(data);
+newSelection.text(function (d) {return "I’m number " + d + "!";});
+</code></pre>
+<pre class="fragment"><code data-trim contenteditable class="javascript">
+// remove all elements that are not bound to data
+var newSelection = updateSelection.data([1, 2]);
+newSelection.exit().remove();
+</code></pre>
+            <div><a target="_blank" href="code/d3-basics.html">Run</a></div>
+        </section>
+
+
+        <section>
+            <h2>Warup-Up</h2>
+        </section>
+
+        <section>
+            <h2>Resources</h2>
+            <ul>
+                <li><a target="_blank"
+                       href="TODO">
+                    TODO
+                </a>
+                <li><a href="http://r2d3.us" target="_blank">
+                    Mind blowing visual introduction to machine learning</a>
+
+
+            </ul>
+        </section>
+        <section>
+            <h1>Thank you!</h1>
+
+            <h2>Questions / Discussion</h2>
+
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+            </p>
+        </section>
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
